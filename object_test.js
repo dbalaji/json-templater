@@ -5,10 +5,28 @@ suite('object', function() {
   function verify(title, input, output) {
     test(title, function() {
       var result = subject.apply(subject, input);
-      assert.deepEqual(output, result);
+      assert.deepStrictEqual(output, result);
     });
   }
 
+    verify(
+        'replace value in nested object',
+        [
+            {
+                foo: {
+                    bar: '{{say.what}}'
+                }
+            },
+            {
+                say: { what: 100 }
+            }
+        ],
+        {
+            foo: {
+                bar: 100
+            }
+        }
+    );
 
   verify(
     'replace value in nested object',

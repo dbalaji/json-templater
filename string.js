@@ -58,12 +58,15 @@ function replace(input, view) {
     if (undefined === value || null === value) {
       return original;
     }
-
-    if (typeof value === 'object') {
+    var vtype= typeof value;
+    if (vtype === 'object') {
       result = value;
       return;
     }
-
+    if (vtype === 'number' && (input.indexOf("}}") === input.length-2 && input.indexOf("{{") ===0)) {
+      result = value;
+      return;
+    }
     return value;
   });
   return (undefined !== result) ? result : replaced;
